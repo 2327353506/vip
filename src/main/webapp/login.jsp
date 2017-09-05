@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <jsp:include page="../../../../target/emro_api/head.jsp"/>
+    <jsp:include page="/head.jsp"/>
 </head>
 <body  style="background-color: #C0C0C0">
     <div class="row" style="height: 100px"></div>
     <div class="row-fluid" id="login">
         <div  style="width: 400px;background-color: white;height: 400px;border-radius:5px;" class="offset5" >
             <div style="text-align:center">
-                <img src="../../../../target/emro_api/plugin/mao/tiantiansifangmao-04.png" class="img-circle" >
+                <img class="img-circle" v-bind:src="head_img">
             </div>
             <form clas="form-horizontal" >
                 <div class="control-group row-fluid">
@@ -48,7 +48,8 @@
             errorInfo : "",
             isError : false,
             username : "",
-            password : ""
+            password : "",
+            head_img:"/plugin/mao/tiantiansifangmao-04.png"
         },
         methods : {
             submit : function(event){
