@@ -7,7 +7,11 @@
 
 <title>vip</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="<%=basePath %>/plugin/bootstrap/css/bootstrap.css">
-<script type="text/javascript" src="<%=basePath %>/plugin/jquery.min.js"></script>
-<script type="text/javascript" src="<%=basePath %>/plugin/bootstrap/js/bootstrap.js"></script>
-<script type="text/javascript" src="<%=basePath %>/plugin/vue.js"></script>
+<script>
+    var root = "<%=basePath %>";
+</script>
+<link rel="stylesheet" type="text/css" href="<%=basePath %>/webjars/bootstrap/3.3.7/dist/css/bootstrap.css">
+<%--<script type="text/javascript" src="<%=basePath %>/webjars/jquery/3.2.1/dist/jquery.js"></script>
+
+<script type="text/javascript" src="<%=basePath %>/webjars/bootstrap/3.3.7/dist/js/css/bootstrap.js"></script>--%>
+<script type="text/javascript" src="<%=basePath %>/webjars/vue/2.4.2/vue.js"></script>
