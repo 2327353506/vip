@@ -15,3 +15,4 @@
 
 <script type="text/javascript" src="<%=basePath %>/webjars/bootstrap/3.3.7/dist/js/css/bootstrap.js"></script>--%>
 <script type="text/javascript" src="<%=basePath %>/webjars/vue/2.4.2/vue.js"></script>
+<script type="text/javascript" src="<%=basePath %>/webjars/axios/0.16.1/axios.js"></script>

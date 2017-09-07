@@ -221,6 +221,11 @@
       <artifactId>vue</artifactId>
       <version>2.4.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>axios</artifactId>
+      <version>0.16.1</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>emro_api</finalName>
