@@ -28,7 +28,7 @@
             <div style="width: 100%;background-color: #30404D;height: 500px">
                 <ul class="nav nav-pills nav-stacked">
                     <li v-for="menu in menus"  v-bind:class="{active:menu.check}">
-                        <a href="#" v-on:click="click_memnu(menu)" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span> {{menu.authName}}
+                        <a  v-on:click="click_memnu(menu)" ><span class="glyphicon glyphicon-home" aria-hidden="true"></span> {{menu.authName}}
                             <span style="float: right;font-weight: bolder" v-if="menu.check">-</span>
                             <span style="float: right;font-weight: bolder" v-else="menu.check">+</span>
                         </a>
@@ -69,43 +69,25 @@
                 </div>
             </div>
             <div class="row " style="background-color: white;height: 50px;" >
-                <ol class="breadcrumb">
-                    <li ><router-link to="/login.jsp">首页</router-link>
-                    <%--<a  v-link="{path:'/view-a'}">首页</a>--%>
-                    </li>
-                    <li ><router-link to="/view-b">首页2</router-link>
-                        <%--<a  v-link="{path:'/view-a'}">首页</a>--%>
-                    </li>
-                    <li v-for="menu in path_menu" class="active">{{menu.title}}</li>
-                </ol>
+                <ul class="nav nav-tabs">
+                    <li v-for="(menu,index) in iframe_menu" v-bind:class="{active:menu.check}" v-on:click="click_tab(index)"><a >{{menu.title}}</a></li>
+                </ul>
             </div>
             <div class="row" style="background-color: white;height: 100%">
-                <router-view></router-view>
+                <div v-for="menu in iframe_menu" v-show="menu.check"><h1>{{menu.title}}</h1></div>
             </div>
         </div>
     </div>
 </body>
 <script type="text/javascript">
 
-
-    var ViewA = Vue.extend({
-        template: "<div><h1>sdsdasdas</h1><p>sdasdasdasdsad.</p></div>"
-    })
-    var ViewB = Vue.extend({
-        template: '<div><h1>sdsdasdas</h1><p>sdasdasdasdsad.</p></div>'
-    })
-
-    var routes =  [{path: '/view-a', component: ViewA},{path: '/view-b', component: ViewB }]
-
-
-    var router = new VueRouter({routes :routes });
-
     var index = new Vue({
         el : "#index",
-        router : router,
         data : {
             menus : [],
-            path_menu : []
+            iframe_menu : [{
+                title : "首页",href : "#",id: 0 ,check :true
+            }]
         },
         methods : {
             click_memnu : function(menu){
@@ -121,15 +103,31 @@
                     this.$set(root.child[i],"check",false);
                 }
                 this.$set(menu, "check", true);
-                this.path_menu=[
-                    {title: root.authName ,path:"#" },
-                    {title: menu.authName ,path:menu.targetUrl}
-                    ]
-                router.push("/view-a")
+                var exist = false;
+                for(var i in this.iframe_menu){
+                    if(this.iframe_menu[i].id != menu.id){
+                        this.iframe_menu[i].check = false;
+                    }else{
+                        this.iframe_menu[i].check = true;
+                        exist =true;
+                    }
+                }
+                if(!exist){
+                    this.iframe_menu.push({title: menu.authName ,href:menu.targetUrl,id:menu.id,check :true });
+                }
+            },
+            click_tab : function(index){
+                for(var i in this.iframe_menu){
+                    if(i == index){
+                        this.iframe_menu[i].check = true;
+                    }else{
+                        this.iframe_menu[i].check = false;
+                    }
+                }
             },
             init : function(){
                 var _this = this;
-                ajax.get("http://localhost:8080/emro_boss/staff/auth",function(res){
+                ajax.get("http://localhost:8080/plugin/menu.json",function(res){
                     _this.menus = res.data.data;
                 })
             }
@@ -137,7 +135,7 @@
         mounted : function(){
             this.init()
         }
-    }).$mount('#index');
+    })
 
 </script>
 </html>
