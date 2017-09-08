@@ -35,7 +35,7 @@
                         <transition name="fade">
                             <ul v-if="menu.check" class="nav nav-pills nav-stacked" style="width: 100%;background-color: #3B4C5C">
                                 <li v-for="m in menu.child" style="margin-left: 20px;" v-bind:class="{active:m.check}">
-                                    <a href="#" v-on:click="click_memnu_ch(m,menu)">{{m.authName}}</a>
+                                    <a  v-on:click="click_memnu_ch(m,menu)">{{m.authName}}</a>
                                 </li>
                             </ul>
                         </transition>
@@ -70,13 +70,17 @@
             </div>
             <div class="row " style="background-color: white;height: 50px;" >
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
+                    <li ><router-link to="/login.jsp">首页</router-link>
+                    <%--<a  v-link="{path:'/view-a'}">首页</a>--%>
+                    </li>
+                    <li ><router-link to="/view-b">首页2</router-link>
+                        <%--<a  v-link="{path:'/view-a'}">首页</a>--%>
+                    </li>
+                    <li v-for="menu in path_menu" class="active">{{menu.title}}</li>
                 </ol>
             </div>
             <div class="row" style="background-color: white;height: 100%">
-
+                <router-view></router-view>
             </div>
         </div>
     </div>
@@ -84,11 +88,24 @@
 <script type="text/javascript">
 
 
+    var ViewA = Vue.extend({
+        template: "<div><h1>sdsdasdas</h1><p>sdasdasdasdsad.</p></div>"
+    })
+    var ViewB = Vue.extend({
+        template: '<div><h1>sdsdasdas</h1><p>sdasdasdasdsad.</p></div>'
+    })
+
+    var routes =  [{path: '/view-a', component: ViewA},{path: '/view-b', component: ViewB }]
+
+
+    var router = new VueRouter({routes :routes });
 
     var index = new Vue({
         el : "#index",
+        router : router,
         data : {
-            menus : []
+            menus : [],
+            path_menu : []
         },
         methods : {
             click_memnu : function(menu){
@@ -103,7 +120,12 @@
                 for(var i in root.child){
                     this.$set(root.child[i],"check",false);
                 }
-                this.$set(menu, "check", true)
+                this.$set(menu, "check", true);
+                this.path_menu=[
+                    {title: root.authName ,path:"#" },
+                    {title: menu.authName ,path:menu.targetUrl}
+                    ]
+                router.push("/view-a")
             },
             init : function(){
                 var _this = this;
@@ -115,6 +137,7 @@
         mounted : function(){
             this.init()
         }
-    })
+    }).$mount('#index');
+
 </script>
 </html>

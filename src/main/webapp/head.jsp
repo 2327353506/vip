@@ -16,6 +16,8 @@
 <%--<script type="text/javascript" src="<%=basePath %>/webjars/bootstrap/3.3.7/dist/js/css/bootstrap.js"></script>--%>
 <script type="text/javascript" src="<%=basePath %>/webjars/vue/2.4.2/vue.js"></script>
 <script type="text/javascript" src="<%=basePath %>/webjars/axios/0.16.1/dist/axios.js"></script>
+<script type="text/javascript" src="<%=basePath %>/webjars/vue-router/2.6.0/dist/vue-router.js"></script>
+<script type="text/javascript" src="<%=basePath %>/webjars/requirejs/2.3.3/require.js"  ></script>
 <script>
     var ajax = {
         get : function(url,fun,errfun){
