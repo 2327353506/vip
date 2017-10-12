@@ -8,6 +8,14 @@
     <param-value>classpath:spring.xml</param-value>
   </context-param>
 
+<!--  <filter>
+      <filter-name>loginFilter</filter-name>
+      <filter-class>vip.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>loginFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+  </filter-mapping>-->
   <!--
   	     设置请求所用的字符集
 	   encoding:字符类型
